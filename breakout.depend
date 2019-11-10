@@ -1,0 +1,52 @@
+# depslib dependency file v1.0
+1573412757 source:/home/eike/Desktop/Programmieren/breakout_clone/src/main.cpp
+	<engine.h>
+	<window/graphics_context.h>
+	<string>
+	<core/core.h>
+
+1573411861 /home/eike/Desktop/Programmieren/breakout_clone/engine/undicht/engine/src/engine.h
+	<window/graphics_context.h>
+
+1573411861 /home/eike/Desktop/Programmieren/breakout_clone/engine/undicht/core/include/window/graphics_context.h
+	<window/window_lib.h>
+	<window/window.h>
+	<functional>
+
+1573411861 /home/eike/Desktop/Programmieren/breakout_clone/engine/undicht/core/include/window/window_lib.h
+	<core/shared_lib.h>
+	<core/shared_lib_class.h>
+	<functional>
+	<core/shared_lib_class.h>
+
+1573411861 /home/eike/Desktop/Programmieren/breakout_clone/engine/undicht/core/include/core/shared_lib.h
+	<string>
+	<iostream>
+	<core/note.h>
+	<dlfcn.h>
+	<windows.h>
+
+1573411861 /home/eike/Desktop/Programmieren/breakout_clone/engine/undicht/core/include/core/note.h
+	<vector>
+	<string>
+	<core/memory_watcher.h>
+	<sstream>
+	<iostream>
+
+1573411861 /home/eike/Desktop/Programmieren/breakout_clone/engine/undicht/core/include/core/memory_watcher.h
+	<vector>
+
+1573411861 /home/eike/Desktop/Programmieren/breakout_clone/engine/undicht/core/include/core/shared_lib_class.h
+	<core/shared_lib.h>
+	<core/shared_lib_class.h>
+	<functional>
+
+1573411861 /home/eike/Desktop/Programmieren/breakout_clone/engine/undicht/core/include/window/window.h
+	<core/shared_lib.h>
+	<window/window_lib.h>
+	<functional>
+
+1573411861 /home/eike/Desktop/Programmieren/breakout_clone/engine/undicht/core/include/core/core.h
+	<core/shared_lib.h>
+	<string>
+
