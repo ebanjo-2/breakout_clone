@@ -12,9 +12,16 @@ using namespace undicht::graphics;
 using namespace undicht::window;
 using namespace undicht::core;
 
-std::string window_lib = "engine/undicht/core/implementation/window/glfw/libwindow_glfw.so";
+// linux
+/*std::string window_lib = "engine/undicht/core/implementation/window/glfw/libwindow_glfw.so";
 std::string graphics_lib = "engine/undicht/core/implementation/graphics/opengl_33/libvideo_opengl_33.so";
-std::string audio_lib = "engine/undicht/core/implementation/audio/openal/libaudio_openal.so";
+std::string audio_lib = "engine/undicht/core/implementation/audio/openal/libaudio_openal.so";*/
+
+// windows
+std::string window_lib = "engine/undicht/core/implementation/window/glfw/window_glfw.dll";
+std::string graphics_lib = "engine/undicht/core/implementation/graphics/opengl_33/video_opengl_33.dll";
+std::string audio_lib = "engine/undicht/core/implementation/audio/openal/audio_openal.dll";
+
 
 int main() {
 
