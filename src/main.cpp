@@ -6,6 +6,8 @@
 
 #include <2D/sprite_renderer.h>
 #include <file_loading/image/image_reader.h>
+#include <2D/physics/physics_engine.h>
+#include <2D/physics/rectangle_hitbox.h>
 
 using namespace undicht;
 using namespace undicht::graphics;
@@ -13,14 +15,14 @@ using namespace undicht::window;
 using namespace undicht::core;
 
 // linux
-/*std::string window_lib = "engine/undicht/core/implementation/window/glfw/libwindow_glfw.so";
+std::string window_lib = "engine/undicht/core/implementation/window/glfw/libwindow_glfw.so";
 std::string graphics_lib = "engine/undicht/core/implementation/graphics/opengl_33/libvideo_opengl_33.so";
-std::string audio_lib = "engine/undicht/core/implementation/audio/openal/libaudio_openal.so";*/
+std::string audio_lib = "engine/undicht/core/implementation/audio/openal/libaudio_openal.so";
 
 // windows
-std::string window_lib = "engine/undicht/core/implementation/window/glfw/window_glfw.dll";
+/*std::string window_lib = "engine/undicht/core/implementation/window/glfw/window_glfw.dll";
 std::string graphics_lib = "engine/undicht/core/implementation/graphics/opengl_33/video_opengl_33.dll";
-std::string audio_lib = "engine/undicht/core/implementation/audio/openal/audio_openal.dll";
+std::string audio_lib = "engine/undicht/core/implementation/audio/openal/audio_openal.dll";*/
 
 
 int main() {
@@ -55,16 +57,18 @@ int main() {
         image_reader.loadImage(brick, "res/brick.png");
         brick.setScale(glm::vec2(0.08, -0.04));
 
-        std::vector<Sprite> bricks;
+        /*std::vector<Sprite> bricks;
 
         for(int y = 0; y < 4; y++) {
             for(int x = 0; x < 11; x++) {
                 bricks.push_back(brick);
                 bricks.back().setPosition(glm::vec3(0.16 * x - 0.8, -0.08 * y + 0.76, 0));
             }
-        }
+        }*/
 
         SpriteRenderer renderer;
+
+        glm::vec3 ball_speed(0,1,0);
 
 
         while(!window->shouldClose()) {
@@ -74,9 +78,10 @@ int main() {
             renderer.draw(board);
             renderer.draw(ball);
 
-            for(Sprite& s : bricks) {
+            /*for(Sprite& s : bricks) {
                 renderer.draw(s);
-            }
+            }*/
+            renderer.draw(brick);
 
             // doing physics stuff (what it could look like)
             /* Hitbox ball_hitbox;
@@ -110,6 +115,27 @@ int main() {
             // moving the ball
 
             ball_hitbox.setPosition(ball_path.getEndPosition()); */
+
+            // what the first prototype of the physics looks like
+            RectangleHitbox ball_box;
+            RectangleHitbox brick_box;
+
+            ball_box.m_position = glm::vec2(ball.getPosition().x, ball.getPosition().y);
+            ball_box.m_size = ball.getScale();
+            ball_box.m_speed = glm::vec2(ball_speed.x, ball_speed.y);
+
+            brick_box.m_position = glm::vec2(brick.getPosition().x, brick.getPosition().y);
+            brick_box.m_size = brick.getScale();
+
+            Collision2D collision = PhysicsEngine::testCollision(ball_box, brick_box);
+            if(collision.getCollisionTime() < 0.02) {
+                ball_speed *= -1;
+            }
+
+            // updating the balls position
+            ball.m_position += ball_speed;
+
+
 
             // showing the stuff on the screen
             context->swapBuffers();
