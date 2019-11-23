@@ -15,14 +15,14 @@ using namespace undicht::window;
 using namespace undicht::core;
 
 // linux
-std::string window_lib = "engine/undicht/core/implementation/window/glfw/libwindow_glfw.so";
+/*std::string window_lib = "engine/undicht/core/implementation/window/glfw/libwindow_glfw.so";
 std::string graphics_lib = "engine/undicht/core/implementation/graphics/opengl_33/libvideo_opengl_33.so";
-std::string audio_lib = "engine/undicht/core/implementation/audio/openal/libaudio_openal.so";
+std::string audio_lib = "engine/undicht/core/implementation/audio/openal/libaudio_openal.so";*/
 
 // windows
-/*std::string window_lib = "engine/undicht/core/implementation/window/glfw/window_glfw.dll";
+std::string window_lib = "engine/undicht/core/implementation/window/glfw/window_glfw.dll";
 std::string graphics_lib = "engine/undicht/core/implementation/graphics/opengl_33/video_opengl_33.dll";
-std::string audio_lib = "engine/undicht/core/implementation/audio/openal/audio_openal.dll";*/
+std::string audio_lib = "engine/undicht/core/implementation/audio/openal/audio_openal.dll";
 
 
 int main() {
@@ -41,7 +41,7 @@ int main() {
 
         Sprite board;
         image_reader.loadImage(board, "res/board.png");
-        board.setScale(glm::vec2(0.2, -0.05));
+        board.setScale(glm::vec2(0.22, -0.05));
         board.setPosition(glm::vec3(0, -0.8, 0));
 
         Sprite background;
@@ -56,6 +56,7 @@ int main() {
         Sprite brick;
         image_reader.loadImage(brick, "res/brick.png");
         brick.setScale(glm::vec2(0.08, -0.04));
+        brick.setPosition(glm::vec3(0,0.5,0));
 
         /*std::vector<Sprite> bricks;
 
@@ -68,7 +69,7 @@ int main() {
 
         SpriteRenderer renderer;
 
-        glm::vec3 ball_speed(0,1,0);
+        glm::vec3 ball_speed(0,0.01,0);
 
 
         while(!window->shouldClose()) {
@@ -119,6 +120,7 @@ int main() {
             // what the first prototype of the physics looks like
             RectangleHitbox ball_box;
             RectangleHitbox brick_box;
+            RectangleHitbox board_box;
 
             ball_box.m_position = glm::vec2(ball.getPosition().x, ball.getPosition().y);
             ball_box.m_size = ball.getScale();
@@ -127,7 +129,18 @@ int main() {
             brick_box.m_position = glm::vec2(brick.getPosition().x, brick.getPosition().y);
             brick_box.m_size = brick.getScale();
 
-            Collision2D collision = PhysicsEngine::testCollision(ball_box, brick_box);
+            board_box.m_position = glm::vec2(board.getPosition().x, board.getPosition().y);
+            board_box.m_size = board.getScale();
+
+            Collision2D collision;
+            collision = PhysicsEngine::testCollision(ball_box, brick_box);
+
+            if(collision.getCollisionTime() < 0.02) {
+                ball_speed *= -1;
+            }
+
+            collision = PhysicsEngine::testCollision(ball_box, board_box);
+
             if(collision.getCollisionTime() < 0.02) {
                 ball_speed *= -1;
             }
