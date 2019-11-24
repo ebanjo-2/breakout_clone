@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1574531475 source:d:\programmieren\cb workspace\breakout_clone\src\main.cpp
+1574587600 source:d:\programmieren\cb workspace\breakout_clone\src\main.cpp
 	<engine.h>
 	<window/graphics_context.h>
 	<string>
@@ -346,9 +346,10 @@
 	<graphics/texture.h>
 	<2D/animation.h>
 
-1574510482 d:\programmieren\cb workspace\breakout_clone\engine\undicht\engine\src\2d\physics\physics_engine.h
+1574588113 d:\programmieren\cb workspace\breakout_clone\engine\undicht\engine\src\2d\physics\physics_engine.h
 	<2D/physics/hitbox.h>
 	<2D/physics/collision.h>
+	<2D/physics/rectangle_hitbox.h>
 	<glm/glm/glm.hpp>
 
 1574430217 d:\programmieren\cb workspace\breakout_clone\engine\undicht\engine\src\2d\physics\hitbox.h
@@ -358,10 +359,11 @@
 
 1573831334 d:\programmieren\cb workspace\breakout_clone\engine\undicht\engine\src\2d\physics\collision.h
 
-1574529394 d:\programmieren\cb workspace\breakout_clone\engine\undicht\engine\src\2d\physics\collision_profile.h
+1574540472 d:\programmieren\cb workspace\breakout_clone\engine\undicht\engine\src\2d\physics\collision_profile.h
 	<vector>
+	<glm/glm/glm.hpp>
 
-1574519982 d:\programmieren\cb workspace\breakout_clone\engine\undicht\engine\src\2d\physics\rectangle_hitbox.h
+1574588132 d:\programmieren\cb workspace\breakout_clone\engine\undicht\engine\src\2d\physics\rectangle_hitbox.h
 	<glm/glm/glm.hpp>
 	<2D/physics/hitbox.h>
 	<array>

@@ -77,12 +77,12 @@ int main() {
             // drawing
             renderer.draw(background);
             renderer.draw(board);
-            renderer.draw(ball);
-
             /*for(Sprite& s : bricks) {
                 renderer.draw(s);
             }*/
             renderer.draw(brick);
+
+            renderer.draw(ball);
 
             // doing physics stuff (what it could look like)
             /* Hitbox ball_hitbox;
