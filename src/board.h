@@ -3,14 +3,12 @@
 
 #include <2D/sprite.h>
 #include <2D/physics/rectangle_hitbox.h>
+#include <game_object.h>
 
 
-class Board {
+class Board : public GameObject {
 
     public:
-
-        undicht::Sprite m_sprite;
-        undicht::RectangleHitbox m_hitbox;
 
         /** moving based on the user input */
         virtual void update();

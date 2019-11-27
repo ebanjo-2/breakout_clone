@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="debug - windows">
-				<Option output="breakout.exe" prefix_auto="0" extension_auto="0" />
+				<Option output="breakout" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/debug - windows" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -21,14 +21,14 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="core" />
-					<Add library="engine" />
 					<Add directory="engine/undicht/core" />
 					<Add directory="engine/undicht/engine" />
+					<Add library="core" />
+					<Add library="engine" />
 				</Linker>
 			</Target>
 			<Target title="debug - linux">
-				<Option output="breakout.exe" prefix_auto="0" extension_auto="0" />
+				<Option output="breakout" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/debug - linux" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -42,16 +42,15 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add directory="engine/undicht/core" />
+					<Add directory="engine/undicht/engine" />
 					<Add library="core" />
 					<Add library="engine" />
 					<Add library="dl" />
-					<Add directory="engine/undicht/core" />
-					<Add directory="engine/undicht/engine" />
-					<Add directory="." />
 				</Linker>
 			</Target>
 			<Target title="release - windows">
-				<Option output="breakout.exe" prefix_auto="0" extension_auto="0" />
+				<Option output="breakout" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/release - windows" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -65,14 +64,14 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="core" />
-					<Add library="engine" />
 					<Add directory="engine/undicht/core" />
 					<Add directory="engine/undicht/engine" />
+					<Add library="core" />
+					<Add library="engine" />
 				</Linker>
 			</Target>
 			<Target title="release - linux">
-				<Option output="breakout.exe" prefix_auto="0" extension_auto="0" />
+				<Option output="breakout" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/release - linux" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -86,24 +85,37 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add directory="engine/undicht/core" />
+					<Add directory="engine/undicht/engine" />
 					<Add library="core" />
 					<Add library="engine" />
 					<Add library="dl" />
-					<Add directory="engine/undicht/core" />
-					<Add directory="engine/undicht/engine" />
-					<Add directory="." />
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="src/board.cpp" />
-		<Unit filename="src/board.h" />
-		<Unit filename="src/level.cpp" />
-		<Unit filename="src/level.h" />
-		<Unit filename="src/main.cpp" />
-		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-		</Extensions>
+		<Unit filename="src/game_object.h">
+		</Unit>
+		<Unit filename="src/game_object.cpp">
+		</Unit>
+		<Unit filename="src/level.h">
+		</Unit>
+		<Unit filename="src/ball.cpp">
+		</Unit>
+		<Unit filename="src/level.cpp">
+		</Unit>
+		<Unit filename="src/brick.cpp">
+		</Unit>
+		<Unit filename="src/ball.h">
+		</Unit>
+		<Unit filename="src/board.h">
+		</Unit>
+		<Unit filename="src/brick.h">
+		</Unit>
+		<Unit filename="src/main.cpp">
+		</Unit>
+		<Unit filename="src/board.cpp">
+		</Unit>
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
+
