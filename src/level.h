@@ -8,6 +8,7 @@
 #include <ball.h>
 #include <vector>
 
+
 class Level : private GameObject {
     public:
 
@@ -15,14 +16,16 @@ class Level : private GameObject {
         Ball m_ball;
         std::vector<Brick> m_bricks;
 
+        virtual void init(undicht::window::KeyInputWatcher* input);
+
         /** moving the board + ball */
         virtual void update(float time);
 
-        virtual void init();
-
-
         /** @return all the sprites in the level */
         virtual std::vector<undicht::Sprite*> getSprites();
+
+        /** true if all blocks were broken */
+        bool isFinished();
 
         Level();
         virtual ~Level();

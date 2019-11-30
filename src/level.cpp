@@ -22,46 +22,7 @@ Level::~Level() {
 }
 
 
-void Level::update(float delta_time) {
-    /** moving the board + ball */
-
-    Collision2D c; // the object to hold data about collisions
-
-    // testing for collision between ball + board
-    c = PhysicsEngine::testCollision(m_ball.m_hitbox, m_board.m_hitbox);
-
-    if(c.getCollisionTime() < delta_time * 1.1) {
-        std::cout << "board collision" << "\n";
-        m_ball.setSpeed(m_ball.getSpeed() * glm::vec2(1,-1)); // reverse y direction
-    }
-
-    // testing for collisions between ball + bricks
-    for(Brick& b : m_bricks) {
-        if(!b.m_destroyed) {
-            c = PhysicsEngine::testCollision(m_ball.m_hitbox, b.m_hitbox);
-            if(c.getCollisionTime() < delta_time * 1.1) {
-                m_ball.setSpeed(m_ball.getSpeed() * glm::vec2(1,-1)); // more details would need to be known
-                b.m_destroyed = true;
-            }
-        }
-    }
-
-    // testing for collisions between ball + level edges
-    c = PhysicsEngine::testCollision(m_ball.m_hitbox, m_hitbox);
-
-    if(c.getCollisionTime() < delta_time * 1.1) {
-                    std::cout << "level collision" << "\n";
-
-        m_ball.setSpeed(m_ball.getSpeed() * glm::vec2(-1,-1)); // more details would need to be known
-    }
-
-    // moving ball + board
-    m_board.update();
-    m_ball.update(delta_time);
-
-}
-
-void Level::init() {
+void Level::init(undicht::window::KeyInputWatcher* input) {
 
     // loading all sprites
     ImageReader image_reader;
@@ -77,10 +38,11 @@ void Level::init() {
     // setting all the default positions and scales of the levels objects
     m_board.setScale(glm::vec2(0.22f, -0.05f));
     m_board.setPosition(glm::vec2(0.0f, -0.8f));
+    m_board.m_input = input;
 
     m_ball.setPosition(glm::vec2(0,0));
     m_ball.setScale(glm::vec2(0.03, -0.04));
-    m_ball.setSpeed(glm::vec2(0.2,-0.5));
+    m_ball.setSpeed(glm::vec2(1,-1));
 
     brick_prototype.setScale(glm::vec2(0.08, -0.04));
 
@@ -99,6 +61,53 @@ void Level::init() {
 }
 
 
+
+void Level::update(float delta_time) {
+    /** moving the board + ball */
+
+    Collision2D c; // the object to hold data about collisions
+
+    // testing for collision between ball + board
+    c = PhysicsEngine::testCollision(m_ball.m_hitbox, m_board.m_hitbox);
+
+    if(c.getCollisionTime() < 0.02) {
+        m_ball.setSpeed(m_ball.getSpeed() * glm::vec2(1,-1)); // reverse y direction
+    }
+
+    // testing for collisions between ball + bricks
+    for(Brick& b : m_bricks) {
+        if(!b.m_destroyed) {
+            c = PhysicsEngine::testCollision(m_ball.m_hitbox, b.m_hitbox);
+            if(c.getCollisionTime() < 0.02) {
+                m_ball.setSpeed(m_ball.getSpeed() * glm::vec2(1,-1)); // more details would need to be known
+                b.m_destroyed = true;
+            }
+        }
+    }
+
+    // testing for collisions between ball + level edges
+    c = PhysicsEngine::testCollision(m_ball.m_hitbox, m_hitbox);
+
+    if(c.getCollisionTime() < 0.02) {
+
+        if(glm::length(m_ball.getPosition().y) > 0.9 ) {
+            m_ball.setSpeed(m_ball.getSpeed() * glm::vec2( 1,-1));
+        }
+
+        if(glm::length(m_ball.getPosition().x) > 0.9 ) {
+            m_ball.setSpeed(m_ball.getSpeed() * glm::vec2(-1, 1));
+        }
+
+    }
+
+    // moving ball + board
+    m_board.update();
+    m_ball.update(delta_time);
+
+}
+
+
+
 std::vector<undicht::Sprite*> Level::getSprites() {
     /** @return all the sprites in the level */
 
@@ -115,5 +124,21 @@ std::vector<undicht::Sprite*> Level::getSprites() {
     }
 
     return sprites;
+}
+
+
+
+bool Level::isFinished() {
+    /** true if all blocks were broken */
+
+
+    for(Brick& b : m_bricks){
+        if(!b.m_destroyed) {
+
+            return false;
+        }
+    }
+
+    return true;
 }
 

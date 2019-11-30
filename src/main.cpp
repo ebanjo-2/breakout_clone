@@ -16,14 +16,14 @@ using namespace undicht::window;
 using namespace undicht::core;
 
 // linux
-std::string window_lib = "engine/undicht/core/implementation/window/glfw/libwindow_glfw.so";
+/*std::string window_lib = "engine/undicht/core/implementation/window/glfw/libwindow_glfw.so";
 std::string graphics_lib = "engine/undicht/core/implementation/graphics/opengl_33/libvideo_opengl_33.so";
-std::string audio_lib = "engine/undicht/core/implementation/audio/openal/libaudio_openal.so";
+std::string audio_lib = "engine/undicht/core/implementation/audio/openal/libaudio_openal.so";*/
 
 // windows
-/*std::string window_lib = "engine/undicht/core/implementation/window/glfw/window_glfw.dll";
+std::string window_lib = "engine/undicht/core/implementation/window/glfw/window_glfw.dll";
 std::string graphics_lib = "engine/undicht/core/implementation/graphics/opengl_33/video_opengl_33.dll";
-std::string audio_lib = "engine/undicht/core/implementation/audio/openal/audio_openal.dll";*/
+std::string audio_lib = "engine/undicht/core/implementation/audio/openal/audio_openal.dll";
 
 
 int main() {
@@ -41,11 +41,13 @@ int main() {
 
         SpriteRenderer renderer;
 
+        KeyInputWatcher input;
+        input.setWindow(window);
+
         Level level;
-        level.init();
+        level.init(&input);
 
-
-        while(!window->shouldClose()) {
+        while(!window->shouldClose() && !level.isFinished()) {
 
             // game mechanics
             level.update(0.016);
@@ -61,8 +63,11 @@ int main() {
             window->update();
         }
 
+        std::cout << "Congratulations!!!! " << "\n";
 
     }
+
+
 
     Engine::terminate(window, context);
 
